@@ -1,0 +1,54 @@
+<html>
+    <head>
+        <title>Maths Game</title>
+        <link rel="stylesheet" href="" />
+    </head>
+    <body>
+
+        <div id="container">
+            <p>Can you do this addition sum?</p>
+            <p id="firstNumber"></p>
+            <p id="symbol">+</p>
+            <p id="secondNumber"></p>
+            <p>=</p>
+            <input type="text" id="userAnswer" />
+            <button id="check">Check!</button>
+            <p id="displayAnswer"></p>
+        </div>
+
+        <script>
+
+            // randomising the first number 1 to 20
+            
+            var firstNumber = Math.floor(Math.random() * 20) + 1;
+
+            document.getElementById("firstNumber").innerHTML = firstNumber;
+
+            // randomising the second number 1 to 10
+
+            var secondNumber = Math.floor(Math.random() * 10) + 1;
+
+            document.getElementById("secondNumber").innerHTML = secondNumber;
+
+            // doing the maths to get the correct answer
+
+            var correctAnswer = (firstNumber + secondNumber);
+
+            // checking the user answer matches the correct answer, and displaying the correct answer to the user
+
+            document.getElementById("check").onclick = function() {
+
+                var userAnswer = document.getElementById("userAnswer").value;
+
+                if (userAnswer == correctAnswer) {
+                    document.getElementById("displayAnswer").innerHTML = ("Correct! The answer was " + correctAnswer + ". Well done!");
+                } else {
+                    document.getElementById("displayAnswer").innerHTML = ("The correct answer was " + correctAnswer + ". Try another!");
+                }
+
+            }
+            
+        </script>
+
+    </body>
+</html>
