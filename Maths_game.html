@@ -3,7 +3,7 @@
         <title>Maths Game</title>
         <link rel="stylesheet" href="" />
     </head>
-    <body>
+    <body onload="initialise()">
 
         <div id="container">
             <p>Can you do this addition sum?</p>
@@ -11,42 +11,55 @@
             <p id="symbol">+</p>
             <p id="secondNumber"></p>
             <p>=</p>
-            <input type="text" id="userAnswer" />
-            <button id="check">Check!</button>
+            <form autocomplete="off" onsubmit="return false" id="form">
+                <input type="text" id="userAnswer" />
+                <button id="check">Check!</button>
+            </form>
             <p id="displayAnswer"></p>
+            <button id="reset">Try another!</button>
+            <p id="sumCounter"></p>
         </div>
 
         <script>
 
-            // randomising the first number 1 to 20
-            
-            var firstNumber = Math.floor(Math.random() * 20) + 1;
+            // creating intialise function
 
-            document.getElementById("firstNumber").innerHTML = firstNumber;
+            function initialise() {
+                // randomising the first number 1 to 20
+                var firstNumber = Math.floor(Math.random() * 20) + 1;
+                document.getElementById("firstNumber").innerHTML = firstNumber;
 
-            // randomising the second number 1 to 10
+                // randomising the second number 1 to 10
+                var secondNumber = Math.floor(Math.random() * 10) + 1;
+                document.getElementById("secondNumber").innerHTML = secondNumber;
 
-            var secondNumber = Math.floor(Math.random() * 10) + 1;
+                // doing the maths to get the correct answer
+                var correctAnswer = (firstNumber + secondNumber);
+                
+                // initialise the user input field
+                document.forms["form"].reset();
+                
+                // initialising the display text
+                document.getElementById("displayAnswer").innerHTML = ("");
 
-            document.getElementById("secondNumber").innerHTML = secondNumber;
+                // checking the user answer matches the correct answer, and displaying the correct answer to the user
 
-            // doing the maths to get the correct answer
+                document.getElementById("check").onclick = function() {
 
-            var correctAnswer = (firstNumber + secondNumber);
+                    var userAnswer = document.getElementById("userAnswer").value;
 
-            // checking the user answer matches the correct answer, and displaying the correct answer to the user
-
-            document.getElementById("check").onclick = function() {
-
-                var userAnswer = document.getElementById("userAnswer").value;
-
-                if (userAnswer == correctAnswer) {
+                    if (userAnswer == correctAnswer) {
                     document.getElementById("displayAnswer").innerHTML = ("Correct! The answer was " + correctAnswer + ". Well done!");
-                } else {
+                    } else {
                     document.getElementById("displayAnswer").innerHTML = ("The correct answer was " + correctAnswer + ". Try another!");
-                }
+                    }
 
+                }
+                
             }
+            
+            // reset the numbers and input when "Try another!" button clicked
+            document.getElementById("reset").onclick = initialise;
             
         </script>
 
